@@ -122,11 +122,23 @@ def image_5():
 
 
 def image_6():
-    pass
+    img = get_image(6)
+    plot(img)
+
+    clahe = cv2.createCLAHE(clipLimit=5, tileGridSize=(3, 3))
+    filtered_img = clahe.apply(img)
+    blurred_img = cv2.GaussianBlur(filtered_img, (3, 3), 1)
+    filtered_img = cv2.addWeighted(filtered_img, 2, blurred_img, -1, -2)
+    plot(np.clip(filtered_img, 0, 255))
 
 
 def image_7():
-    pass
+    img = get_image(7)
+    plot(img)
+
+    clahe = cv2.createCLAHE(clipLimit=2, tileGridSize=(3, 3))
+    filtered_img = clahe.apply(img)
+    plot(filtered_img)
 
 
 def image_8():
@@ -140,11 +152,25 @@ def image_8():
 
 
 def image_9():
-    pass
+    img = get_image(9)
+    plot(img)
+
+    filtered_img = np.array(255 * (img / 255) ** 0.9, dtype=np.uint8)
+    blurred_img = cv2.GaussianBlur(filtered_img, (3, 3), 3)
+    mask = img - blurred_img
+    filtered_img = img + 0.1 * mask
+    plot(filtered_img)
 
 
 def image_10():
-    pass
+    img = get_image(10)
+    plot(img)
+
+    filtered_img = np.array(255 * (img / 255) ** 0.5, dtype=np.uint8)
+    blurred_img = cv2.GaussianBlur(filtered_img, (3, 3), 1.5)
+    mask = img - blurred_img
+    filtered_img = img + 0.1 * mask
+    plot(filtered_img)
 
 
 def image_11():
@@ -183,13 +209,13 @@ def main():
     image_1()
     image_2()
     image_3()
-    # image_4()
+    image_4()
     image_5()
-    # image_6()
-    # image_7()
+    image_6()
+    image_7()
     image_8()
-    # image_9()
-    # image_10()
+    image_9()
+    image_10()
     image_11()
     image_12()
 
